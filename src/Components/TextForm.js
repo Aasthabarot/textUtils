@@ -9,23 +9,29 @@ export default function TextForm(props) {
         //  console.log("Uppercase was clicked" + text);
          let newtext = text.toUpperCase();
          setText(newtext);
+         props.showAlert('Converted to Uppercase', 'success');
     }
     const handleLoClick = ()=>
       {
           //  console.log("Uppercase was clicked" + text);
            let newtext = text.toLowerCase();
            setText(newtext);
+           props.showAlert("Converted to lowercase","success");
+           
       }
 
       const handleClearClick = ()=>
         {
              let newtext = ('');
              setText(newtext);
+             props.showAlert("Text has been cleared", "success");
+           
         }
     const handleonchange = (event)=>
         {
             //  console.log("on change");
              setText(event.target.value)
+
         }
       
         const handleCopy = ()=>
@@ -33,11 +39,17 @@ export default function TextForm(props) {
                let text = document.getElementById("myBox");
                text.select();
                navigator.clipboard.writeText(text.value);
+               props.showAlert("Text copied to Clipboard !!","success");
+           
+         
           }
 
           const handleExtraSpaces = () => {
             let newtext = text.split(/\s+/);
             setText(newtext.join(" ").trim());
+            props.showAlert("Removed Extra Spaces From Text","success");
+           
+            
         }
         
 
@@ -58,7 +70,7 @@ export default function TextForm(props) {
 </div>
 <div className="container my-3" style={{color:props.mode==='dark'? 'white' :'black'}}>
   <h2>Your text summary</h2>
-  <p>{text.split(" ").length} words  and {text.length} characters</p>
+  <p>{text.split(" ").length-1} words  and {text.length} characters</p>
   <p>{0.008 * text.split(" ").length} Minutes read</p>
   <h3>Preview</h3>
   <p>{text.length>0?text:"enter something to preview here :)"}</p>
